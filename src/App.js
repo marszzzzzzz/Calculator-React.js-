@@ -7,11 +7,11 @@ const symbolIcon = [
   "AC",
   "+-",
   "%",
-  "/",
+  "÷",
   7,
   8,
   9,
-  "X",
+  "×",
   4,
   5,
   6,
@@ -141,7 +141,7 @@ class App extends React.Component {
         clearNum: true,
       }));
     }
-    if (this.state.calcu === "X") {
+    if (this.state.calcu === "×") {
       const newMulti = (this.addCurNum() * this.addCalNum())
         .toString()
         .split("");
@@ -152,7 +152,7 @@ class App extends React.Component {
         clearNum: true,
       }));
     }
-    if (this.state.calcu === "/") {
+    if (this.state.calcu === "÷") {
       const newDiv = (this.addCalNum() / this.addCurNum()).toString().split("");
       this.setState(() => ({
         calcu: "",
@@ -182,7 +182,7 @@ class App extends React.Component {
         clearNum: true,
       }));
     }
-    if (this.state.calcu === "X") {
+    if (this.state.calcu === "×") {
       const newMulti = (this.addCurNum() * this.addCalNum())
         .toString()
         .split("");
@@ -193,7 +193,7 @@ class App extends React.Component {
         clearNum: true,
       }));
     }
-    if (this.state.calcu === "/") {
+    if (this.state.calcu === "÷") {
       const newDiv = (this.addCalNum() / this.addCurNum()).toString().split("");
       this.setState(() => ({
         calcu: target.innerHTML,
@@ -224,7 +224,7 @@ class App extends React.Component {
         >
           testing
         </button>
-        <div>
+        <div className='secondBig'>
           <div className="value">Ready Value: {this.state.calNum}</div>
           <div className="value">Arithmetic Operator:{this.state.calcu}</div>
           <div className="value">
@@ -248,7 +248,7 @@ class App extends React.Component {
                     ? this.percentageClicker
                     : val === "="
                     ? this.equalClicker
-                    : val === "/" || val === "X" || val === "-" || val === "+"
+                    : val === "÷" || val === "×" || val === "-" || val === "+"
                     ? this.arithmeticCliker
                     : val === "."
                     ? this.dotClicker
