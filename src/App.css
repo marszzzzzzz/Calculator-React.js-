@@ -39,15 +39,15 @@ button:hover {
   opacity: 0.9;
   color: lightcyan;
   border-color: teal;
-  box-shadow: 0 5px teal;
-  transition: background-color 0.5s, color 1s;
+  box-shadow: 0 8px #003737;
+  transition: color 1s;
 
 }
 
 button:active {
   background-color: lightcyan;
-  box-shadow: 0 5px teal;
-  transform: translateY(2px);
+  box-shadow: 0 3px #003737;
+  transform: translateY(5px);
 }
 
 .value {
@@ -57,13 +57,13 @@ padding: 0 2em;
 }
 
 .big{
-  border-radius: 10%;
+  border-radius: 5%;
   border: 0;
   background-image: url("background.png");
   background-size: 100% 100%;
   width: 70vw;
   margin: 10vh auto;
-  box-shadow: 3px 6px rgb(0, 55, 55), 3px 3px 30px lightcyan;
+  box-shadow: 3px 6px #003737, 3px 3px 30px lightcyan;
 }
 
 .secondBig {
