@@ -4,7 +4,7 @@
 }
 
 body {
-  background-color: rgb(8, 0, 60);
+  background-image: linear-gradient(to bottom, #003264, #08003c, #030014);
 }
 
 .container {
@@ -30,23 +30,23 @@ button{
   height: 3em;
   margin: 8px;
   font-size: 24px;
-  background-color: lightcyan;
+  background-color: rgba(224, 255, 255, 0.2);
 }
 
 button:hover {
-  background-color: rgb(40, 0, 140);
+  background-image: url("button.png");
+  background-size: cover;
+  background-color: rgb(0, 40, 140);
+  opacity: 0.9;
   color: lightcyan;
   border-color: teal;
-  box-shadow: 0 5px teal;
-  transition: background-color 0.5s, color 1s;
-
+  box-shadow: 0 8px #003737;
+  transition: background-color 0.4s, color 1s;
 }
 
 button:active {
-  background-color: lightcyan;
-  box-shadow: 0 5px teal;
-  color: rgb(8, 0, 60);
-  transform: translateY(2px);
+  box-shadow: 0 3px #003737;
+  transform: translateY(5px);
 }
 
 .value {
@@ -56,12 +56,13 @@ padding: 0 2em;
 }
 
 .big{
-  border-radius: 5% 5% 10% 10%;
+  border-radius: 5%;
   border: 0;
-  background-color: lightcyan;
+  background-image: url("background.png");
+  background-size: 100% 100%;
   width: 70vw;
   margin: 10vh auto;
-  box-shadow: 3px 6px rgb(0, 55, 55), 3px 3px 30px lightcyan;
+  box-shadow: 3px 6px #003737, 3px 3px 30px lightcyan;
 }
 
 .secondBig {
