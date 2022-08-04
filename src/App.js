@@ -263,6 +263,8 @@ class App extends React.Component {
 
   render() {
     return (
+      <div>
+        <h1>Gidimon</h1>
       <div className="big">
         <button
           onClick={() => {
@@ -305,6 +307,7 @@ class App extends React.Component {
             );
           })}
         </div>
+      </div>
       </div>
     );
   }
