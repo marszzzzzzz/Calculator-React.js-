@@ -271,7 +271,7 @@ class App extends React.Component {
         >
           testing
         </button>
-        <div>
+        <div className='secondBig'>
           <div className="value">Ready Value: {this.state.calNum}</div>
           <div className="value">Arithmetic Operator:{this.state.calcu}</div>
           <div className="value">
