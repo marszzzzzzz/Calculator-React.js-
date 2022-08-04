@@ -265,49 +265,42 @@ class App extends React.Component {
     return (
       <div>
         <h1>Gidimon</h1>
-      <div className="big">
-        <button
-          onClick={() => {
-            console.log(this.state, this.state.curNum.indexOf("-") === 0);
-          }}
-        >
-          testing
-        </button>
-        <div className='secondBig'>
-          <div className="value">Ready Value: {this.state.calNum}</div>
-          <div className="value">Arithmetic Operator:{this.state.calcu}</div>
-          <div className="value">
-            Current Value:
-            {this.state.curNum}
+        <div className="big">
+          <div className='secondBig'>
+            <div className="value">Ready Value: {this.state.calNum}</div>
+            <div className="value">Arithmetic Operator:{this.state.calcu}</div>
+            <div className="value">
+              Current Value:
+              {this.state.curNum}
+            </div>
+          </div>
+          <div className="container">
+            {symbolIcon.map((val, ind) => {
+              return (
+                <SymBtn
+                  className={val}
+                  value={val}
+                  key={ind}
+                  onClick={
+                    val === "AC"
+                      ? this.resetClicker
+                      : val === "+-"
+                        ? this.invertClicker
+                        : val === "%"
+                          ? this.percentageClicker
+                          : val === "="
+                            ? this.equalClicker
+                            : val === "÷" || val === "×" || val === "-" || val === "+"
+                              ? this.arithmeticCliker
+                              : val === "."
+                                ? this.dotClicker
+                                : this.numClicker
+                  }
+                />
+              );
+            })}
           </div>
         </div>
-        <div className="container">
-          {symbolIcon.map((val, ind) => {
-            return (
-              <SymBtn
-                className={val}
-                value={val}
-                key={ind}
-                onClick={
-                  val === "AC"
-                    ? this.resetClicker
-                    : val === "+-"
-                    ? this.invertClicker
-                    : val === "%"
-                    ? this.percentageClicker
-                    : val === "="
-                    ? this.equalClicker
-                    : val === "÷" || val === "×" || val === "-" || val === "+"
-                    ? this.arithmeticCliker
-                    : val === "."
-                    ? this.dotClicker
-                    : this.numClicker
-                }
-              />
-            );
-          })}
-        </div>
-      </div>
       </div>
     );
   }
