@@ -22,11 +22,12 @@ h1:hover {
 }
 
 .container {
-display: grid;
-grid-template: repeat(5, 1fr) / repeat(4, 1fr);
-gap: 10px 10px;
-margin: 0 auto;
+  display: grid;
+  grid-template: repeat(5, 1fr) / repeat(4, 1fr);
+  gap: 10px 10px;
+  margin: 0 auto;
 }
+
 /*.equal {
 border: 2px blue solid;
 grid-column: 3 / 5;
@@ -37,7 +38,7 @@ grid-column: 3 / 5;
   justify-content: center;
   align-items: center; 
 }*/
-button{
+button {
   border-radius: 40%;
   border: 0;
   width: 3em;
@@ -64,9 +65,9 @@ button:active {
 }
 
 .value {
-display: flex;
-justify-content: end;
-padding: 0 2em;
+  display: flex;
+  justify-content: end;
+  padding: 0 2em;
 }
 
 .big:hover {
@@ -74,7 +75,7 @@ padding: 0 2em;
   box-shadow: 2px 8px #003737, 3px 3px 30px lightcyan;
 }
 
-.big{
+.big {
   border-radius: 40px;
   border: 0;
   background-image: url("background.png");
@@ -88,8 +89,13 @@ padding: 0 2em;
 }
 
 .secondBig {
-background-color: #ffffff66;
-margin: 2em 2em 0;
-padding: 2em 0;
-border-radius: 20px;
+  background-color: #ffffff66;
+  margin: 2em 2em 0;
+  padding: 2em 0;
+  border-radius: 20px;
+}
+
+.secondBig:hover {
+  background-color: hsla(0, 0%, 100%, 0.6);
+  transition: background-color 0.6s;
 }
