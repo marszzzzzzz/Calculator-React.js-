@@ -1,21 +1,69 @@
+* {
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+  color: rgb(8, 0, 60);
+}
+
+body {
+  background-color: rgb(8, 0, 60);
+}
+
 .container {
   display: grid;
-  border: 2px blue solid;
   grid-template: repeat(5, 1fr) / repeat(4, 1fr);
-  height: 200px;
-  width: 300px;
   gap: 10px 10px;
+  margin: 0 auto;
 }
-.equal {
+/*.equal {
   border: 2px blue solid;
   grid-column: 3 / 5;
 }
+
+.row{
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}*/
+button {
+  border-radius: 40%;
+  border: 0;
+  width: 3em;
+  height: 3em;
+  margin: 8px;
+  font-size: 24px;
+  background-color: lightcyan;
+}
+
+button:hover {
+  background-color: rgb(40, 0, 140);
+  color: lightcyan;
+  border-color: teal;
+  box-shadow: 0 5px teal;
+  transition: background-color 0.5s, color 1s;
+}
+
+button:active {
+  background-color: lightcyan;
+  box-shadow: 0 5px teal;
+  color: rgb(8, 0, 60);
+  transform: translateY(2px);
+}
+
 .value {
   display: flex;
   justify-content: end;
+  padding: 0 2em;
 }
+
 .big {
-  width: 300px;
-  margin: 0 auto;
-  border: 3px red dotted;
+  border-radius: 5% 5% 10% 10%;
+  border: 0;
+  background-color: lightcyan;
+  width: 70vw;
+  margin: 10vh auto;
+  box-shadow: 3px 6px rgb(0, 55, 55), 3px 3px 30px lightcyan;
+}
+
+.secondBig {
+  display: flex;
+  justify-content: between;
 }

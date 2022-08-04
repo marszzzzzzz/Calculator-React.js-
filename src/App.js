@@ -1,17 +1,16 @@
 import "./App.css";
 import SymBtn from "./button";
 import React from "react";
-import ReactDOM from "react-dom";
 
 const symbolIcon = [
   "AC",
   "+-",
   "%",
-  "/",
+  "÷",
   7,
   8,
   9,
-  "X",
+  "×",
   4,
   5,
   6,
@@ -29,7 +28,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      curNum: [],
+      curNum: "0",
       calNum: [],
       calcu: "",
       clearNum: false,
@@ -46,6 +45,22 @@ class App extends React.Component {
     this.equalHandleClciker = this.equalHandleClciker.bind(this);
   }
 
+  componentDidUpdate() {
+    if (this.state.curNum === "NaN") {
+      alert("you just got NaN");
+      this.setState((prev) => ({
+        ...prev,
+        curNum: "0",
+      }));
+    } else if (this.state.curNum === "Infinity") {
+      this.setState((prev) => ({
+        ...prev,
+        curNum: "0",
+      }));
+      alert("you just got Infinity");
+    }
+  }
+
   arithmeticCliker({ target }) {
     if (this.state.calcu && this.state.curNum && this.state.calNum) {
       this.equalHandleClciker({ target });
@@ -53,24 +68,43 @@ class App extends React.Component {
       this.setState((prev) => ({
         ...prev,
         calcu: target.innerHTML,
-        curNum: [],
+        curNum: "0",
         calNum: this.state.curNum,
       }));
     }
   }
 
   numClicker({ target }) {
-    if (this.state.clearNum === false) {
-      this.setState((prev) => ({
-        ...prev,
-        curNum: [...prev.curNum, target.innerHTML],
-      }));
+    if (
+      Number(this.state.curNum) === 0 &&
+      this.state.curNum.indexOf(".") === -1
+    ) {
+      if (this.state.curNum.indexOf("-") === 0) {
+        this.setState((prev) => ({
+          ...prev,
+          clearNum: false,
+          curNum: "-" + target.innerHTML,
+        }));
+      } else {
+        this.setState((prev) => ({
+          ...prev,
+          clearNum: false,
+          curNum: target.innerHTML,
+        }));
+      }
     } else {
-      this.setState((prev) => ({
-        ...prev,
-        clearNum: false,
-        curNum: [target.innerHTML],
-      }));
+      if (this.state.clearNum === false) {
+        this.setState((prev) => ({
+          ...prev,
+          curNum: prev.curNum + target.innerHTML,
+        }));
+      } else {
+        this.setState((prev) => ({
+          ...prev,
+          clearNum: false,
+          curNum: target.innerHTML,
+        }));
+      }
     }
   }
 
@@ -78,13 +112,13 @@ class App extends React.Component {
     this.setState(() => ({
       calcu: "",
       calNum: [],
-      curNum: [],
+      curNum: "0",
       clearNum: false,
     }));
   }
 
   invertClicker() {
-    if (this.state.curNum.includes("-")) {
+    if (this.state.curNum.indexOf("-") === 0) {
       const sliceCur = this.state.curNum.slice(1);
       this.setState((prev) => ({
         ...prev,
@@ -93,38 +127,40 @@ class App extends React.Component {
     } else {
       this.setState((prev) => ({
         ...prev,
-        curNum: ["-", ...prev.curNum],
+        curNum: "-" + prev.curNum,
       }));
     }
   }
 
+  dotClicker() {
+    if (this.state.curNum.indexOf(".") === -1 && !this.state.clearNum) {
+      if (this.state.curNum.length === 0) {
+        this.setState((prev) => ({
+          ...prev,
+          curNum: "0." + prev.curNum,
+        }));
+      } else if (!this.state.clearNum) {
+        this.setState((prev) => ({
+          ...prev,
+          curNum: prev.curNum + ".",
+        }));
+      }
+    }
+  }
+
   percentageClicker() {
-    const divide = (this.addCurNum() / 100).toString().split("");
+    const divide = (this.addCurNum() / 100).toString();
     this.setState((prev) => ({
       ...prev,
       curNum: divide,
     }));
   }
 
-  dotClicker() {
-    if (!this.state.curNum.includes(".")) {
-      if (this.state.curNum.length === 0) {
-        this.setState((prev) => ({
-          ...prev,
-          curNum: ["0", ".", ...prev.curNum],
-        }));
-      } else {
-        this.setState((prev) => ({
-          ...prev,
-          curNum: [...prev.curNum, "."],
-        }));
-      }
-    }
-  }
-
   equalClicker() {
     if (this.state.calcu === "+") {
-      const newAdd = (this.addCurNum() + this.addCalNum()).toString().split("");
+      const newAdd = parseFloat(
+        (this.addCurNum() + this.addCalNum()).toFixed(10)
+      ).toString();
       this.setState(() => ({
         calcu: "",
         calNum: [],
@@ -133,7 +169,9 @@ class App extends React.Component {
       }));
     }
     if (this.state.calcu === "-") {
-      const newSub = (this.addCalNum() - this.addCurNum()).toString().split("");
+      const newSub = parseFloat(
+        (this.addCalNum() - this.addCurNum()).toFixed(10)
+      ).toString();
       this.setState(() => ({
         calcu: "",
         calNum: [],
@@ -141,10 +179,10 @@ class App extends React.Component {
         clearNum: true,
       }));
     }
-    if (this.state.calcu === "X") {
-      const newMulti = (this.addCurNum() * this.addCalNum())
-        .toString()
-        .split("");
+    if (this.state.calcu === "×") {
+      const newMulti = parseFloat(
+        (this.addCurNum() * this.addCalNum()).toFixed(10)
+      ).toString();
       this.setState(() => ({
         calcu: "",
         calNum: [],
@@ -152,8 +190,10 @@ class App extends React.Component {
         clearNum: true,
       }));
     }
-    if (this.state.calcu === "/") {
-      const newDiv = (this.addCalNum() / this.addCurNum()).toString().split("");
+    if (this.state.calcu === "÷") {
+      const newDiv = parseFloat(
+        (this.addCalNum() / this.addCurNum()).toFixed(10)
+      ).toString();
       this.setState(() => ({
         calcu: "",
         calNum: [],
@@ -165,7 +205,9 @@ class App extends React.Component {
 
   equalHandleClciker({ target }) {
     if (this.state.calcu === "+") {
-      const newAdd = (this.addCurNum() + this.addCalNum()).toString().split("");
+      const newAdd = parseFloat(
+        (this.addCurNum() + this.addCalNum()).toFixed(10)
+      ).toString();
       this.setState(() => ({
         calcu: target.innerHTML,
         calNum: newAdd,
@@ -174,7 +216,9 @@ class App extends React.Component {
       }));
     }
     if (this.state.calcu === "-") {
-      const newSub = (this.addCalNum() - this.addCurNum()).toString().split("");
+      const newSub = parseFloat(
+        (this.addCalNum() - this.addCurNum()).toFixed(10)
+      ).toString();
       this.setState(() => ({
         calcu: target.innerHTML,
         calNum: newSub,
@@ -182,10 +226,10 @@ class App extends React.Component {
         clearNum: true,
       }));
     }
-    if (this.state.calcu === "X") {
-      const newMulti = (this.addCurNum() * this.addCalNum())
-        .toString()
-        .split("");
+    if (this.state.calcu === "×") {
+      const newMulti = parseFloat(
+        (this.addCurNum() * this.addCalNum()).toFixed(10)
+      ).toString();
       this.setState(() => ({
         calcu: target.innerHTML,
         calNum: newMulti,
@@ -193,8 +237,10 @@ class App extends React.Component {
         clearNum: true,
       }));
     }
-    if (this.state.calcu === "/") {
-      const newDiv = (this.addCalNum() / this.addCurNum()).toString().split("");
+    if (this.state.calcu === "÷") {
+      const newDiv = parseFloat(
+        (this.addCalNum() / this.addCurNum()).toFixed(10)
+      ).toString();
       this.setState(() => ({
         calcu: target.innerHTML,
         calNum: newDiv,
@@ -206,12 +252,13 @@ class App extends React.Component {
 
   addCurNum() {
     const newArr = this.state.curNum;
-    return Number(newArr.join(""));
+    console.log(newArr);
+    return Number(newArr);
   }
 
   addCalNum() {
     const newArr = this.state.calNum;
-    return Number(newArr.join(""));
+    return Number(newArr);
   }
 
   render() {
@@ -219,7 +266,7 @@ class App extends React.Component {
       <div className="big">
         <button
           onClick={() => {
-            console.log(this.state);
+            console.log(this.state, this.state.curNum.indexOf("-") === 0);
           }}
         >
           testing
@@ -248,7 +295,7 @@ class App extends React.Component {
                     ? this.percentageClicker
                     : val === "="
                     ? this.equalClicker
-                    : val === "/" || val === "X" || val === "-" || val === "+"
+                    : val === "÷" || val === "×" || val === "-" || val === "+"
                     ? this.arithmeticCliker
                     : val === "."
                     ? this.dotClicker
